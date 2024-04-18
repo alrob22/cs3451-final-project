@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "tutorials/tutorial_opengl/glfw-3.3/tests",
+		"source" : "tutorials/tutorial_opengl/glfw-3.3/tests"
+	}
+}

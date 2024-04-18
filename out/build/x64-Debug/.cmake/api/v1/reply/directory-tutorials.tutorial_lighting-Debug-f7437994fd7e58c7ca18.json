@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "tutorials/tutorial_lighting",
+		"source" : "tutorials/tutorial_lighting"
+	}
+}
