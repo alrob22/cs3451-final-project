@@ -79,9 +79,13 @@ public:
         //// You can also create your own lights by directly declaring them in a shader without using Add_Light().
         //// Here we declared three default lights for you. Feel free to add/delete/change them at your will.
 
-        opengl_window->Add_Light(Vector3f(3, 1, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(1, 1, 1), Vector3f(0.5, 0.5, 0.5)); 
-        opengl_window->Add_Light(Vector3f(0, 0, -5), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
-        opengl_window->Add_Light(Vector3f(-5, 1, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
+        opengl_window->Add_Light(Vector3f(3, 10, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(1, 1, 1), Vector3f(0.5, 0.5, 0.5));
+        opengl_window->Add_Light(Vector3f(0, 10, -5), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
+        opengl_window->Add_Light(Vector3f(-5, 10, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
+
+        //opengl_window->Add_Light(Vector3f(0, 10, 0), Vector3f(1.0, 0.2, 0.0), Vector3f(1.0, 0.2, 0.0), Vector3f(1, 0.2, 0));
+        //opengl_window->Add_Light(Vector3f(0, 20, 0), Vector3f(0.9, 0.9, 0.9), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
+        //opengl_window->Add_Light(Vector3f(-5, 1, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
 
         //// Add the background / environment
         //// Here we provide you with four default options to create the background of your scene:
@@ -92,22 +96,22 @@ public:
         //// By default, Option (2) (Buzz stars) is turned on, and all the other three are commented out.
         
         //// Background Option (1): Gradient color
-        /*
+        
         {
             auto bg = Add_Interactive_Object<OpenGLBackground>();
-            bg->Set_Color(OpenGLColor(0.1f, 0.1f, 0.1f, 1.f), OpenGLColor(0.3f, 0.1f, .1f, 1.f));
+            bg->Set_Color(OpenGLColor(0.1f, 0.1f, 0.1f, 1.f), OpenGLColor(0.4f, 0.4f, .4f, 1.f));
             bg->Initialize();
         }
-        */
+        
 
         //// Background Option (2): Programmable Canvas
         //// By default, we load a GT buzz + a number of stars
-        {
-            bgEffect = Add_Interactive_Object<OpenGLBgEffect>();
-            bgEffect->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("stars"));
-            bgEffect->Add_Texture("tex_buzz", OpenGLTextureLibrary::Get_Texture("buzz_color")); // bgEffect can also Add_Texture
-            bgEffect->Initialize();
-        }
+        //{
+        //    bgEffect = Add_Interactive_Object<OpenGLBgEffect>();
+        //    bgEffect->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("stars"));
+        //    bgEffect->Add_Texture("tex_buzz", OpenGLTextureLibrary::Get_Texture("buzz_color")); // bgEffect can also Add_Texture
+        //    bgEffect->Initialize();
+        //}
         
         //// Background Option (3): Sky box
         //// Here we provide a default implementation of a sky box; customize it for your own sky box
@@ -138,9 +142,9 @@ public:
 
             //// set object's transform
             Matrix4f t;
-            t << 1, 0, 0, -1.5,
-                0, 1, 0, -1,
-                0, 0, 1, 0.5,
+            t << 0.5, 0, 0, 0,
+                0, 0.5, 0, 0,
+                0, 0, 0.5, 0,
                 0, 0, 0, 1;
             sphere->Set_Model_Matrix(t);
 
@@ -205,9 +209,9 @@ public:
                 0, 10.5, 0, 0,
                 0, 0, 10.5, 0,
                 0, 0, 0, 1;
-            t << 1, 0, 0, -2,
-                 0, 1, 0, 0.5,
-                 0, 0, 1, 0,
+            t << 1, 0, 0, -36,
+                 0, 1, 0, -15,
+                 0, 0, 1, 5,
                  0, 0, 0, 1,
             terrain->Set_Model_Matrix(t * s * r);
 
@@ -216,6 +220,11 @@ public:
             terrain->Set_Kd(Vector3f(0.7f, 0.7f, 0.7f));
             terrain->Set_Ks(Vector3f(1, 1, 1));
             terrain->Set_Shininess(128.f);
+
+            /*terrain->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            terrain->Set_Kd(Vector3f(0.7f, 0.7f, 0.7f));
+            terrain->Set_Ks(Vector3f(0.5f, 0.5f, 0.5f));
+            terrain->Set_Shininess(150.f);*/
 
             //// bind shader to object (we do not bind texture for this object because we create noise for texture)
             terrain->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain"));
