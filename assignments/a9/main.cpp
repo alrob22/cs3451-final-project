@@ -66,8 +66,8 @@ public:
 
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/earth_color.png", "sphere_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/earth_normal.png", "sphere_normal");
-        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/bunny_color.jpg", "bunny_color");
-        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/bunny_normal.png", "bunny_normal");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/dragonScale.jpeg", "dragon_color");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/dragon_normal.jpeg", "dragon_normal");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/window.png", "window_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/buzz_color.png", "buzz_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/star.png", "star_color");
@@ -161,28 +161,33 @@ public:
         //// Here we load a bunny object with the basic shader to show how to add an object into the scene
         {
             //// create object by reading an obj mesh
-            auto bunny = Add_Obj_Mesh_Object("obj/bunny.obj");
+            auto dragon = Add_Obj_Mesh_Object("obj/smaug.obj");
 
             //// set object's transform
+            Matrix4f s;
+            s << 0.1, 0, 0, 0,
+                0, .1, 0, 0,
+                0, 0, .1, 0,
+                0, 0, 0, 1;
             Matrix4f t;
             t << 1, 0, 0, 1.5,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1;
-            bunny->Set_Model_Matrix(t);
+            dragon->Set_Model_Matrix(t * s);
 
             //// set object's material
-            bunny->Set_Ka(Vector3f(0.1, 0.1, 0.1));
-            bunny->Set_Kd(Vector3f(0.7, 0.7, 0.7));
-            bunny->Set_Ks(Vector3f(2, 2, 2));
-            bunny->Set_Shininess(128);
+            dragon->Set_Ka(Vector3f(0.1, 0.1, 0.1));
+            dragon->Set_Kd(Vector3f(0.7, 0.7, 0.7));
+            dragon->Set_Ks(Vector3f(2, 2, 2));
+            dragon->Set_Shininess(128);
 
             //// bind texture to object
-            bunny->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("bunny_color"));
-            bunny->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("bunny_normal"));
+            dragon->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("dragon_color"));
+            dragon->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("dragon_normal"));
 
             //// bind shader to object
-            bunny->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+            dragon->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
         }
 
         //// Here we show an example of adding a mesh with noise-terrain (A6)
@@ -196,9 +201,9 @@ public:
                 0, 0.5, 0.67, 0,
                 0, -0.67, 0.5, 0,
                 0, 0, 0, 1;
-            s << 0.5, 0, 0, 0,
-                0, 0.5, 0, 0,
-                0, 0, 0.5, 0,
+            s << 10.5, 0, 0, 0,
+                0, 10.5, 0, 0,
+                0, 0, 10.5, 0,
                 0, 0, 0, 1;
             t << 1, 0, 0, -2,
                  0, 1, 0, 0.5,
