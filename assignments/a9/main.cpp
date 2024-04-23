@@ -185,7 +185,7 @@ public:
             dragon->Set_Ka(Vector3f(0.1, 0.1, 0.1));
             dragon->Set_Kd(Vector3f(0.7, 0.7, 0.7));
             dragon->Set_Ks(Vector3f(2, 2, 2));
-            dragon->Set_Shininess(128);
+            dragon->Set_Shininess(25);
 
             //// bind texture to object
             dragon->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("dragon_color"));
