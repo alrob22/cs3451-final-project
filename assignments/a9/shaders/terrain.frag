@@ -21,6 +21,19 @@ struct light
 	vec4 atten;
 	vec4 r;
 };
+
+struct pointLight {
+    vec3 position;  
+  
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+	
+    float constant;
+    float linear;
+    float quadratic;
+}; 
+
 layout(std140) uniform lights
 {
 	vec4 amb;
@@ -92,30 +105,39 @@ vec3 compute_normal(vec2 v, float d)
 	return normal_vector;
 }
 
-vec4 shading_phong(light li, vec3 e, vec3 p, vec3 s, vec3 n) 
+vec4 shading_phong(pointLight pl, vec3 e, vec3 p, vec3 s, vec3 n, vec3 pos) 
 {
     vec3 v = normalize(e - p);
     vec3 l = normalize(s - p);
     vec3 r = normalize(reflect(-l, n));
 
-    vec3 ambColor = ka * li.amb.rgb;
-    vec3 difColor = kd * li.dif.rgb * max(0., dot(n, l));
-    vec3 specColor = ks * li.spec.rgb * pow(max(dot(v, r), 0.), shininess);
+    vec3 ambColor = ka * pl.ambient.rgb;
+    vec3 difColor = kd * pl.diffuse.rgb * max(0., dot(n, l));
+    vec3 specColor = ks * pl.specular.rgb * pow(max(dot(v, r), 0.), shininess);
+
+	float distance = length(pl.position - pos);
+	float attenuation = 1.0 / (pl.constant + pl.linear * distance + pl.quadratic * (distance * distance));
+
+	ambColor *= attenuation;
+	difColor *= attenuation;
+	specColor *= attenuation;
 
     return vec4(ambColor + difColor + specColor, 1);
 }
 
 // Draw the terrain
 vec3 shading_terrain(vec3 pos) {
+	const pointLight pl = pointLight(vec3(0, 0, 0), vec3(0.2, 0.2, 0.2), vec3(1., 0.5, 0.), vec3(0.5, 0.5, 0.5), 1.0, 0.014, 0.0007);
+
 	vec3 n = compute_normal(pos.xy, 0.01);
 	vec3 e = position.xyz;
 	vec3 p = pos.xyz;
-	vec3 s = lt[0].pos.xyz;
+	vec3 s = pl.position.xyz;
 
     n = normalize((model * vec4(n, 0)).xyz);
     p = (model * vec4(p, 1)).xyz;
 
-    vec3 color = shading_phong(lt[0], e, p, s, n).xyz;
+    vec3 color = shading_phong(pl, e, p, s, n, pos).xyz;
 
 	float h = pos.z + .8;
 	h = clamp(h, 0.0, 1.0);
