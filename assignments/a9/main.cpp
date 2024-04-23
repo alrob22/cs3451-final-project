@@ -80,7 +80,7 @@ public:
         //// You can also create your own lights by directly declaring them in a shader without using Add_Light().
         //// Here we declared three default lights for you. Feel free to add/delete/change them at your will.
 
-        opengl_window->Add_Light(Vector3f(3, 10, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(1, 1, 1), Vector3f(0.5, 0.5, 0.5));
+        opengl_window->Add_Light(Vector3f(3, 10, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(1., 0.5, 0.), Vector3f(0.5, 0.5, 0.5));
         opengl_window->Add_Light(Vector3f(0, 10, -5), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
         opengl_window->Add_Light(Vector3f(-5, 10, 3), Vector3f(0.1, 0.1, 0.1), Vector3f(0.9, 0.9, 0.9), Vector3f(0.5, 0.5, 0.5));
 
@@ -219,7 +219,7 @@ public:
             terrain->Set_Model_Matrix(t * s * r);
 
             //// set object's material
-            terrain->Set_Ka(Vector3f(0.1f, 0.1f, 0.1f));
+            terrain->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
             terrain->Set_Kd(Vector3f(0.7f, 0.7f, 0.7f));
             terrain->Set_Ks(Vector3f(1, 1, 1));
             terrain->Set_Shininess(128.f);
