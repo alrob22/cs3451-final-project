@@ -169,7 +169,7 @@ public:
         //// Here we load a bunny object with the basic shader to show how to add an object into the scene
         {
             //// create object by reading an obj mesh
-            auto dragon = Add_Obj_Mesh_Object("obj/smaug.obj");
+            auto dragon = Add_Obj_Mesh_Object("obj/smaug_flying2.obj");
 
             //// set object's transform
             Matrix4f s;
