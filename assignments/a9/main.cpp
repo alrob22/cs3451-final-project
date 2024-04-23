@@ -48,6 +48,7 @@ public:
         //// Here "shader_name" needs to be one of the shader names you created previously with Add_Shader_From_File()
 
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/basic.vert", "shaders/basic.frag", "basic");
+        OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/basic.vert", "shaders/pointLight.frag", "pointLight");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/basic.vert", "shaders/environment.frag", "environment");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/stars.vert", "shaders/stars.frag", "stars");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/basic.vert", "shaders/alphablend.frag", "blend");
@@ -213,10 +214,10 @@ public:
                 0, 0, 10.5, 0,
                 0, 0, 0, 1;
             t << 1, 0, 0, -36,
-                 0, 1, 0, -15,
-                 0, 0, 1, 5,
-                 0, 0, 0, 1,
-            terrain->Set_Model_Matrix(t * s * r);
+                0, 1, 0, -15,
+                0, 0, 1, 5,
+                0, 0, 0, 1,
+                terrain->Set_Model_Matrix(t * s * r);
 
             //// set object's material
             terrain->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
@@ -231,6 +232,285 @@ public:
 
             //// bind shader to object (we do not bind texture for this object because we create noise for texture)
             terrain->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain"));
+        }
+
+        // sphere in volcano
+        {
+            //// create object by reading an obj mesh
+            auto vSphere = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << .9, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1., 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -0.4,
+                0, 0, 1., -0.8,
+                0, 0, 0, 1;
+            vSphere->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere->Set_Ka(Vector3f(1.0f, 1.0f, 1.0f));
+            vSphere->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere->Set_Ks(Vector3f(1, 1, 1));
+            vSphere->Set_Shininess(200.f);
+
+            //// bind shader to object
+            vSphere->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
+        }
+
+        // sphere in volcano 2
+        {
+            //// create object by reading an obj mesh
+            auto vSphere2 = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << .9, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1., 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -0.5,
+                0, 0, 1., -0.9,
+                0, 0, 0, 1;
+            vSphere2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere2->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            vSphere2->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere2->Set_Ks(Vector3f(1, 1, 1));
+            vSphere2->Set_Shininess(128.f);
+
+            //// bind shader to object
+            vSphere2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
+        }
+
+        // sphere in volcano 3
+        {
+            //// create object by reading an obj mesh
+            auto vSphere2 = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << .9, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1., 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -0.6,
+                0, 0, 1., -1.,
+                0, 0, 0, 1;
+            vSphere2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere2->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            vSphere2->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere2->Set_Ks(Vector3f(1, 1, 1));
+            vSphere2->Set_Shininess(128.f);
+
+            //// bind shader to object
+            vSphere2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
+        }
+
+        // sphere in volcano 4
+        {
+            //// create object by reading an obj mesh
+            auto vSphere2 = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << .9, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1., 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -0.7,
+                0, 0, 1., -1.1,
+                0, 0, 0, 1;
+            vSphere2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere2->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            vSphere2->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere2->Set_Ks(Vector3f(1, 1, 1));
+            vSphere2->Set_Shininess(128.f);
+
+            //// bind shader to object
+            vSphere2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
+        }
+
+        // sphere in volcano 5
+        {
+            //// create object by reading an obj mesh
+            auto vSphere2 = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << .9, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1., 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -0.8,
+                0, 0, 1., -1.2,
+                0, 0, 0, 1;
+            vSphere2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere2->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            vSphere2->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere2->Set_Ks(Vector3f(1, 1, 1));
+            vSphere2->Set_Shininess(128.f);
+
+            //// bind shader to object
+            vSphere2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
+        }
+
+        // sphere in volcano 6
+        {
+            //// create object by reading an obj mesh
+            auto vSphere2 = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << .9, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1., 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -0.9,
+                0, 0, 1., -1.3,
+                0, 0, 0, 1;
+            vSphere2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere2->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            vSphere2->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere2->Set_Ks(Vector3f(1, 1, 1));
+            vSphere2->Set_Shininess(128.f);
+
+            //// bind shader to object
+            vSphere2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
+        }
+
+        // sphere in volcano 7
+        {
+            //// create object by reading an obj mesh
+            auto vSphere2 = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << .9, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1., 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -1.,
+                0, 0, 1., -1.4,
+                0, 0, 0, 1;
+            vSphere2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere2->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            vSphere2->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere2->Set_Ks(Vector3f(1, 1, 1));
+            vSphere2->Set_Shininess(128.f);
+
+            //// bind shader to object
+            vSphere2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
+        }
+
+        // sphere in volcano 8
+        {
+            //// create object by reading an obj mesh
+            auto vSphere2 = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << .9, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1., 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -1.1,
+                0, 0, 1., -1.5,
+                0, 0, 0, 1;
+            vSphere2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere2->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            vSphere2->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere2->Set_Ks(Vector3f(1, 1, 1));
+            vSphere2->Set_Shininess(128.f);
+
+            //// bind shader to object
+            vSphere2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
+        }
+
+        // sphere in volcano 9
+        {
+            //// create object by reading an obj mesh
+            auto vSphere2 = Add_Obj_Mesh_Object("obj/sphere.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0.5, 0.67, 0,
+                0, -0.67, 0.5, 0,
+                0, 0, 0, 1;
+            s << 1.1, 0, 0, 0,
+                0, 1.2, 0, 0,
+                0, 0, 1.2, 0,
+                0, 0, 0, 1;
+            t << 1., 0, 0, -0.35,
+                0, 1., 0, -1.2,
+                0, 0, 1., -1.4,
+                0, 0, 0, 1;
+            vSphere2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            vSphere2->Set_Ka(Vector3f(0.9f, 0.9f, 0.9f));
+            vSphere2->Set_Kd(Vector3f(1.0f, 0.5f, 0.0f));
+            vSphere2->Set_Ks(Vector3f(1, 1, 1));
+            vSphere2->Set_Shininess(128.f);
+
+            //// bind shader to object
+            vSphere2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain")); // bind shader to object
         }
 
         //// Here we show an example of adding a transparent object with alpha blending

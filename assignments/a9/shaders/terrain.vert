@@ -59,7 +59,7 @@ float height(vec2 v)
 //    if(h < 0)
 //        h *= .5;
 
-    h = noiseOctave(v, 10) * 0.75;
+    h = noiseOctave(v, 20) * 0.75;
     if (h > 0.5) {
         h *= .5;
     }
