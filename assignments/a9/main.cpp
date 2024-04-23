@@ -51,6 +51,7 @@ public:
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/basic.vert", "shaders/environment.frag", "environment");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/stars.vert", "shaders/stars.frag", "stars");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/basic.vert", "shaders/alphablend.frag", "blend");
+        OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/basic.vert", "shaders/dragon.frag", "dragon");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/billboard.vert", "shaders/alphablend.frag", "billboard");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/terrain.vert", "shaders/terrain.frag", "terrain");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/skybox.vert", "shaders/skybox.frag", "skybox");
@@ -66,7 +67,7 @@ public:
 
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/earth_color.png", "sphere_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/earth_normal.png", "sphere_normal");
-        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/dragonScale.jpeg", "dragon_color");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/amethyst.png", "dragon_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/dragon_normal.jpeg", "dragon_normal");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/window.png", "window_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/buzz_color.png", "buzz_color");
@@ -136,6 +137,7 @@ public:
 
         //// Background Option (4): Sky sphere
         //// Here we provide a default implementation of a textured sphere; customize it for your own sky sphere
+        /*
         {
             //// create object by reading an obj mesh
             auto sphere = Add_Obj_Mesh_Object("obj/sphere.obj");
@@ -161,6 +163,7 @@ public:
             //// bind shader to object
             sphere->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
         }
+        */
 
         //// Here we load a bunny object with the basic shader to show how to add an object into the scene
         {
@@ -169,9 +172,9 @@ public:
 
             //// set object's transform
             Matrix4f s;
-            s << 0.1, 0, 0, 0,
-                0, .1, 0, 0,
-                0, 0, .1, 0,
+            s << .05, 0, 0, 0,
+                0, .05, 0, 0,
+                0, 0, .05, 0,
                 0, 0, 0, 1;
             Matrix4f t;
             t << 1, 0, 0, 1.5,
@@ -191,7 +194,7 @@ public:
             dragon->Add_Texture("tex_normal", OpenGLTextureLibrary::Get_Texture("dragon_normal"));
 
             //// bind shader to object
-            dragon->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
+            dragon->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("dragon"));
         }
 
         //// Here we show an example of adding a mesh with noise-terrain (A6)
@@ -233,6 +236,7 @@ public:
         //// Here we show an example of adding a transparent object with alpha blending
         //// This example will be useful if you implement objects such as tree leaves, grass blades, flower pedals, etc.
         //// Alpha blending will be turned on automatically if your texture has the alpha channel
+        /*
         {
             //// create object by reading an obj mesh
             auto sqad = Add_Obj_Mesh_Object("obj/sqad.obj");
@@ -251,10 +255,12 @@ public:
             //// bind shader to object
             sqad->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("blend"));
         }
+        */
 
         //// Here we show an example of adding a billboard particle with a star shape using alpha blending
         //// The billboard is rendered with its texture and is always facing the camera.
         //// This example will be useful if you plan to implement a CPU-based particle system.
+        /*
         {
             //// create object by reading an obj mesh
             auto sqad = Add_Obj_Mesh_Object("obj/sqad.obj");
@@ -273,6 +279,7 @@ public:
             //// bind shader to object
             sqad->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("billboard"));
         }
+        */
 
         //// Here we show an example of shading (ray-tracing) a sphere with environment mapping
         /*
