@@ -98,14 +98,12 @@ public:
         //// By default, Option (2) (Buzz stars) is turned on, and all the other three are commented out.
         
         //// Background Option (1): Gradient color
-        
-        {
+        /*{
             auto bg = Add_Interactive_Object<OpenGLBackground>();
             bg->Set_Color(OpenGLColor(0.1f, 0.1f, 0.1f, 1.f), OpenGLColor(0.4f, 0.4f, .4f, 1.f));
             bg->Initialize();
-        }
+        }*/
         
-
         //// Background Option (2): Programmable Canvas
         //// By default, we load a GT buzz + a number of stars
         //{
@@ -117,16 +115,16 @@ public:
         
         //// Background Option (3): Sky box
         //// Here we provide a default implementation of a sky box; customize it for your own sky box
-        /*
+        
         {
             // from https://www.humus.name/index.php?page=Textures
             const std::vector<std::string> cubemap_files{
-                "cubemap/posx.jpg",     //// + X
-                "cubemap/negx.jpg",     //// - X
-                "cubemap/posy.jpg",     //// + Y
-                "cubemap/negy.jpg",     //// - Y
-                "cubemap/posz.jpg",     //// + Z
-                "cubemap/negz.jpg",     //// - Z 
+                "cubemap/mpa45rt.jpg",     //// + X
+                "cubemap/mpa45lf.jpg",     //// - X
+                "cubemap/mpa45up.jpg",     //// + Y
+                "cubemap/mpa45dn.jpg",     //// - Y
+                "cubemap/mpa45bk.jpg",     //// + Z
+                "cubemap/mpa45ft.jpg",     //// - Z 
             };
             OpenGLTextureLibrary::Instance()->Add_CubeMap_From_Files(cubemap_files, "cube_map");
 
@@ -134,8 +132,7 @@ public:
             skybox->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("skybox"));
             skybox->Initialize();
         }
-        */
-
+        
         //// Background Option (4): Sky sphere
         //// Here we provide a default implementation of a textured sphere; customize it for your own sky sphere
         /*
