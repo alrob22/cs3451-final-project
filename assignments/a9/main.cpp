@@ -72,7 +72,7 @@ public:
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/dragon_normal.jpeg", "dragon_normal");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/window.png", "window_color");
         OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/buzz_color.png", "buzz_color");
-        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/star.png", "star_color");
+        OpenGLTextureLibrary::Instance()->Add_Texture_From_File("tex/Daco.png", "star_color");
 
         //// Add all the lights you need for the scene (no more than 4 lights)
         //// The four parameters are position, ambient, diffuse, and specular.
@@ -537,26 +537,90 @@ public:
         //// Here we show an example of adding a billboard particle with a star shape using alpha blending
         //// The billboard is rendered with its texture and is always facing the camera.
         //// This example will be useful if you plan to implement a CPU-based particle system.
-        /*
+        
         {
             //// create object by reading an obj mesh
             auto sqad = Add_Obj_Mesh_Object("obj/sqad.obj");
 
             //// set object's transform
+
+            Matrix4f s;
+            s << 5, 0, 0, 0,
+                0, 5, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1;
             Matrix4f t;
-            t << 1, 0, 0, 0,
-                 0, 1, 0, 0,
-                 0, 0, 1, 2.5,
-                 0, 0, 0, 1;
-            sqad->Set_Model_Matrix(t);
+            t << 1, 0, 0, -.5,
+                0, 1, 0, -2,
+                0, 0, 1, 2,
+                0, 0, 0, 1;
+    
+            sqad->Set_Model_Matrix(t*s);
+            
 
             //// bind texture to object
             sqad->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("star_color"));
 
             //// bind shader to object
             sqad->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("billboard"));
+            
         }
-        */
+        
+        {
+            //// create object by reading an obj mesh
+            auto sqad = Add_Obj_Mesh_Object("obj/sqad.obj");
+
+            //// set object's transform
+
+            Matrix4f s;
+            s << 5, 0, 0, 0,
+                0, 5, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1;
+            Matrix4f t;
+            t << 1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 2,
+                0, 0, 0, 1;
+
+            sqad->Set_Model_Matrix(t * s);
+
+
+            //// bind texture to object
+            sqad->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("star_color"));
+
+            //// bind shader to object
+            sqad->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("billboard"));
+
+        }
+
+        {
+            //// create object by reading an obj mesh
+            auto sqad = Add_Obj_Mesh_Object("obj/sqad.obj");
+
+            //// set object's transform
+
+            Matrix4f s;
+            s << 5, 0, 0, 0,
+                0, 5, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1;
+            Matrix4f t;
+            t << 1, 0, 0, 1,
+                0, 1, 0, 3,
+                0, 0, 1, 2,
+                0, 0, 0, 1;
+
+            sqad->Set_Model_Matrix(t * s);
+
+
+            //// bind texture to object
+            sqad->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("star_color"));
+
+            //// bind shader to object
+            sqad->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("billboard"));
+
+        }        
 
         //// Here we show an example of shading (ray-tracing) a sphere with environment mapping
         /*

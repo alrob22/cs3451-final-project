@@ -27,7 +27,7 @@ out vec2 vtx_uv;
 out vec3 vtx_tangent;
 
 void main() {
-    vec4 worldPos = model * vec4(pos.xyz, 1.);
+    vec4 worldPos = model * vec4(pos.xyz, .2);
     // ! do not support non-uniform scale
     vec4 worldNormal = model * vec4(normal.xyz, 0.);
     vec4 worldTangent = model * vec4(tangent.xyz, 0.);
