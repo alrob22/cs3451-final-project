@@ -37,6 +37,10 @@ in vec4 vtx_color;
 in vec2 vtx_uv;
 in vec3 vtx_tangent;
 
+uniform float iTime;
+uniform int row = 5;
+uniform int col = 5;
+float frame = 1;
 uniform sampler2D tex_color;   /* texture sampler for color */
 
 /*output variables*/
@@ -44,9 +48,21 @@ out vec4 frag_color;
 
 void main()
 {
-    vec4 tex_color = texture(tex_color, vtx_uv);
+
+    
 
     /* This if statement discard a fragment if its alpha value is below a threshold (for alpha blending) */
+    float stepx = 300;
+    float stepy = 300;
+    vec2 texCoords = vec2(vtx_uv.x, vtx_uv.y)/6;
+         
+        texCoords.y += stepy * 1;
+        texCoords.x += stepx * frame;
+         
+        texCoords.y += stepy * ((frame - (mod( frame, col))) / col);
+        
+
+    vec4 tex_color = texture(tex_color, texCoords);
 
     if(tex_color.a < 0.1)
     {
